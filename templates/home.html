@@ -2,180 +2,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Management System</title>
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Segoe UI',sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-        body{
-            background:linear-gradient(135deg,#0f172a,#1e3a8a);
-            color:white;
-        }
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    color:white;
+}
 
-        nav{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:20px 8%;
-            background:rgba(255,255,255,0.05);
-            backdrop-filter:blur(10px);
-        }
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:rgba(255,255,255,0.08);
+}
 
-        .logo{
-            font-size:28px;
-            font-weight:bold;
-            color:#38bdf8;
-        }
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#38bdf8;
+}
 
-        nav ul{
-            list-style:none;
-            display:flex;
-            gap:30px;
-        }
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
 
-        nav a{
-            color:white;
-            text-decoration:none;
-            transition:0.3s;
-        }
+nav a{
+    color:white;
+    text-decoration:none;
+}
 
-        nav a:hover{
-            color:#38bdf8;
-        }
+.hero{
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
 
-        .hero{
-            min-height:90vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            padding:20px;
-        }
+.hero-content{
+    max-width:800px;
+}
 
-        .hero-content{
-            max-width:800px;
-        }
+.hero h1{
+    font-size:4rem;
+    margin-bottom:20px;
+}
 
-        .hero h1{
-            font-size:4rem;
-            margin-bottom:20px;
-        }
+.hero p{
+    font-size:1.3rem;
+    line-height:1.8;
+    color:#d1d5db;
+    margin-bottom:30px;
+}
 
-        .hero p{
-            font-size:1.3rem;
-            line-height:1.7;
-            color:#d1d5db;
-            margin-bottom:35px;
-        }
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
 
-        .btn{
-            display:inline-block;
-            padding:15px 35px;
-            background:#38bdf8;
-            color:white;
-            text-decoration:none;
-            border-radius:50px;
-            font-weight:bold;
-            transition:0.3s;
-        }
+.btn{
+    padding:15px 35px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
 
-        .btn:hover{
-            transform:translateY(-5px);
-            box-shadow:0 10px 25px rgba(56,189,248,0.5);
-        }
+.primary{
+    background:#38bdf8;
+    color:white;
+}
 
-        .features{
-            padding:80px 8%;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:25px;
-        }
+.secondary{
+    border:2px solid #38bdf8;
+    color:white;
+}
 
-        .card{
-            background:rgba(255,255,255,0.08);
-            padding:30px;
-            border-radius:20px;
-            text-align:center;
-            transition:0.3s;
-        }
+.btn:hover{
+    transform:translateY(-5px);
+}
 
-        .card:hover{
-            transform:translateY(-10px);
-        }
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    padding:40px 20px;
+}
 
-        .card h3{
-            margin-bottom:15px;
-            color:#38bdf8;
-        }
+.stat{
+    background:rgba(255,255,255,.08);
+    padding:25px;
+    width:220px;
+    border-radius:20px;
+    text-align:center;
+}
 
-        .card p{
-            color:#cbd5e1;
-        }
+.stat h2{
+    color:#38bdf8;
+    margin-bottom:10px;
+}
 
-        footer{
-            text-align:center;
-            padding:25px;
-            background:#020617;
-            color:#94a3b8;
-        }
-    </style>
+.features{
+    padding:80px 8%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:rgba(255,255,255,.08);
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#38bdf8;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#020617;
+    margin-top:40px;
+}
+</style>
+
 </head>
 <body>
 
-    <nav>
-        <div class="logo">FlaskApp</div>
+<nav>
+    <div class="logo">AMS</div>
 
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🚀 Welcome to the Home Page</h1>
+<section class="hero">
+    <div class="hero-content">
 
-            <p>
-                Build powerful and modern web applications with Flask.
-                Fast, lightweight, scalable, and perfect for learning
-                full-stack web development.
-            </p>
+        <h1>📚 Attendance Management System</h1>
 
-            <a href="#" class="btn">Get Started</a>
-        </div>
-    </section>
+        <p>
+            Track student attendance efficiently, generate reports,
+            monitor classroom activity, and manage attendance records
+            with a modern and secure web-based system.
+        </p>
 
-    <section class="features">
-
-        <div class="card">
-            <h3>⚡ Fast Development</h3>
-            <p>Create web applications quickly using Python and Flask.</p>
+        <div class="buttons">
+            <a href="/login" class="btn primary">Login</a>
+            <a href="/register" class="btn secondary">Register</a>
         </div>
 
-        <div class="card">
-            <h3>🔒 Secure</h3>
-            <p>Implement authentication, sessions, and security features.</p>
-        </div>
+    </div>
+</section>
 
-        <div class="card">
-            <h3>📊 Database Ready</h3>
-            <p>Connect easily with MySQL, PostgreSQL, or SQLite.</p>
-        </div>
+<section class="stats">
 
-    </section>
+    <div class="stat">
+        <h2>1000+</h2>
+        <p>Students</p>
+    </div>
 
-    <footer>
-        <p>© 2026 Flask Application | Built with Python & Flask</p>
-    </footer>
+    <div class="stat">
+        <h2>50+</h2>
+        <p>Teachers</p>
+    </div>
+
+    <div class="stat">
+        <h2>10,000+</h2>
+        <p>Attendance Records</p>
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="card">
+        <h3>✅ Easy Attendance</h3>
+        <p>Mark attendance quickly and accurately.</p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Reports</h3>
+        <p>Generate detailed attendance reports instantly.</p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍🏫 Teacher Dashboard</h3>
+        <p>Manage students and attendance records easily.</p>
+    </div>
+
+    <div class="card">
+        <h3>🔒 Secure System</h3>
+        <p>Protected login and secure student information.</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Attendance Management System | Built with Flask & Python</p>
+</footer>
 
 </body>
 </html>
